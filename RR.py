@@ -23,6 +23,7 @@ class RR(FCFS):
         if self.processes:
             while self.processes[self._round_(self.i)].status == "terminated":
                 self.i += 1
+                self.time[0] += SWITCHING
                 bound -= 1
                 if bound == 0:
                     return False

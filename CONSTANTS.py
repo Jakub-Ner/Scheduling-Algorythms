@@ -1,9 +1,9 @@
 # general
-N = 10_00
+N = 50_00
 SWITCHING = 0.1
 
 # SJF
-BIAS = 0.3
+BIAS = 0.03  # - sorting bias
 
 # RR
 QUANTUM = 10

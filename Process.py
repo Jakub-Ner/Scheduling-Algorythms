@@ -12,7 +12,7 @@ class Process:
                               + (int(random.random() * 100) if random.random() > 0.9 else 1)
         self.execution_time_archive = self.execution_time
 
-    # does the process execute?
+    # returns if (the process execute)
     def execute(self, current_time):
         if self.execution_time > 0:
             self.execution_time -= 1

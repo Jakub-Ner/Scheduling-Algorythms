@@ -89,11 +89,14 @@ if __name__ == '__main__':
     print("\nFCFS:")
     print("maxi waiting time : ", max_waiting_time(processes_FCFS))
     print("mean waiting time : ", mean_waiting_time(processes_FCFS))
+    print("total time : ", round(FCFS.time[0], 2))
 
     print("\nSJF:")
     print("maxi waiting time : ", int(max_waiting_time(processes_SJF)))
     print("mean waiting time : ", int(mean_waiting_time(processes_SJF)))
+    print("total time : ", round(SJF.time[0], 2))
 
     print("\nRR:")
     print("maxi waiting time : ", int(max_waiting_time(processes_RR)))
     print("mean waiting time : ", int(mean_waiting_time(processes_RR)))
+    print("total time : ", round(RR.time[0], 2))

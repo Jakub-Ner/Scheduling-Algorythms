@@ -1,4 +1,4 @@
-from CONSTANTS import BIAS
+from CONSTANTS import BIAS, SWITCHING
 
 
 class SJF:
@@ -15,6 +15,7 @@ class SJF:
             if not self.processes["current"][0].execute(self.time):
                 self.terminated_processes.append(self.processes["current"][0])
                 self.processes["current"].pop(0)
+                self.time[0] += SWITCHING
 
     def sort(self):
         list = self.processes["current"]

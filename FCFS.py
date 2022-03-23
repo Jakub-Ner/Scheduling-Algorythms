@@ -1,3 +1,4 @@
+from CONSTANTS import SWITCHING
 class FCFS:
     def __init__(self):
         self.processes = []
@@ -8,3 +9,4 @@ class FCFS:
         if self.i < len(self.processes):
             if not self.processes[self.i].execute(self.time):
                 self.i += 1
+                self.time[0] += SWITCHING
