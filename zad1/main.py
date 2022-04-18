@@ -10,14 +10,14 @@ SJF = SJF()
 RR = RR()
 
 processes_FCFS = FCFS.processes
-processes_SJF = SJF.processes
-processes_RR = RR.processes
+processes_SSTF = SJF.processes
+processes_SCAN = RR.processes
 
 
 def add_new_processes(iteration):
     global processes_FCFS
-    global processes_SJF
-    global processes_RR
+    global processes_SSTF
+    global processes_SCAN
 
     if random.random() > 0.8:
         number_of_new_processes = int(abs(random.gauss(int(math.sqrt(N - iteration)), 30)))
@@ -73,7 +73,7 @@ if __name__ == '__main__':
             FCFS.time[0] += 1
             FCFS.run()
 
-    while len(processes_SJF["current"]) > 0:
+    while len(processes_SSTF["current"]) > 0:
         SJF.time[0] += 1
         SJF.run()
 
@@ -81,10 +81,10 @@ if __name__ == '__main__':
     while RR.run():
         RR.time[0] += 1
 
-    processes_SJF = SJF.terminated_processes
+    processes_SSTF = SJF.terminated_processes
 
     print("\nTotal number of processes: ", len(processes_FCFS))
-    print("maxi execution time: ", max_execution_time(processes_SJF))
+    print("maxi execution time: ", max_execution_time(processes_SSTF))
 
     print("\nFCFS:")
     print("maxi waiting time : ", max_waiting_time(processes_FCFS))
@@ -92,11 +92,11 @@ if __name__ == '__main__':
     print("total time : ", round(FCFS.time[0], 2))
 
     print("\nSJF:")
-    print("maxi waiting time : ", int(max_waiting_time(processes_SJF)))
-    print("mean waiting time : ", int(mean_waiting_time(processes_SJF)))
+    print("maxi waiting time : ", int(max_waiting_time(processes_SSTF)))
+    print("mean waiting time : ", int(mean_waiting_time(processes_SSTF)))
     print("total time : ", round(SJF.time[0], 2))
 
     print("\nRR:")
-    print("maxi waiting time : ", int(max_waiting_time(processes_RR)))
-    print("mean waiting time : ", int(mean_waiting_time(processes_RR)))
+    print("maxi waiting time : ", int(max_waiting_time(processes_SCAN)))
+    print("mean waiting time : ", int(mean_waiting_time(processes_SCAN)))
     print("total time : ", round(RR.time[0], 2))
