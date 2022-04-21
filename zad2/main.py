@@ -2,18 +2,15 @@ from random import random, randint, gauss
 import math
 
 from CONSTANTS import *
+from Process import Process
+from FCFS import FCFS
 
-processes_FCFS = []
-processes_SSTF = []
-processes_SCAN = []
+FCFS = FCFS()
 number_all_of_processes = 0
 time = 0
 
 
 def add_new_processes(iteration):
-    global processes_FCFS
-    global processes_SSTF
-    global processes_SCAN
     global number_all_of_processes
 
     if random() > 0.8:
@@ -22,15 +19,19 @@ def add_new_processes(iteration):
 
         for j in range(number_of_new_processes):
             location = randint(0, SIZE)
-            processes_FCFS.append(location)
+            FCFS.list_of_processes["new"].append(Process(time, location))
 
 
 if __name__ == '__main__':
 
     for i in range(1, N):
+        FCFS.run(time)
         time += 1
         add_new_processes(i)
 
-        FCFS.run()
-        SJF.run()
-        RR.run()
+    while FCFS.run(time):
+        time += 1
+
+    import pandas as pd
+
+    print(FCFS)
