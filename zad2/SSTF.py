@@ -31,13 +31,9 @@ class SSTF(Disc):
         elif self.current.location < self.location:
             self.location = -1
 
-    def run(self, time):
-        self.should_find_current = True
-        return super().run(time)
-
     def sort(self):
         list = self.list_of_processes["waiting"]
-
+        # bubble sort
         for i in range(len(list) - 1):
             for j in range(len(list) - 1 - i):
                 if abs(list[j].location - self.location) >  abs(list[j + 1].location - self.location):
