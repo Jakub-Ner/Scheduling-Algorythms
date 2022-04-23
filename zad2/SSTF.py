@@ -7,7 +7,7 @@ class SSTF(Disc):
         self.list_of_processes.update({"new": []})
 
     def __repr__(self):
-        print("--- FCFS ---")
+        print("--- SSTF ---")
         print("total distance: ", self.distance)
         Disc.__repr__(self)
         return " "
@@ -18,7 +18,7 @@ class SSTF(Disc):
         return True
 
     def find_current(self):
-        self.sort()
+        self.sort(self.list_of_processes["waiting"], self.list_of_processes["new"])
         if self.list_of_processes["waiting"]:
             self.current = self.list_of_processes["waiting"][0]
             return True
@@ -31,22 +31,21 @@ class SSTF(Disc):
         elif self.current.location < self.location:
             self.location = -1
 
-    def sort(self):
-        list = self.list_of_processes["waiting"]
+    def sort(self, list, new_list):
         # bubble sort
         for i in range(len(list) - 1):
             for j in range(len(list) - 1 - i):
-                if abs(list[j].location - self.location) >  abs(list[j + 1].location - self.location):
-                    list[j], list[j+1] = list[j+1], list[j]
+                if abs(list[j].location - self.location) > abs(list[j + 1].location - self.location):
+                    list[j], list[j + 1] = list[j + 1], list[j]
 
         # condition is needed at the beginning of the simulation
-        if len(list) == 0 and len(self.list_of_processes["new"]) != 0:
-            list.append(self.list_of_processes["new"][0])
-            self.list_of_processes["new"].pop(0)
+        if len(list) == 0 and len(new_list) != 0:
+            list.append(new_list[0])
+            new_list.pop(0)
 
-        for new_element in self.list_of_processes["new"]:
+        for new_element in new_list:
             self.binsearch(new_element, list)
-        self.list_of_processes["new"].clear()
+        new_list.clear()
 
     def binsearch(self, element, list):
         start = 0

@@ -8,10 +8,10 @@ class Disc:
         self.current = None
         self.list_of_processes = {"waiting": [], "old": []}
         self.distance = 0
-        # self.unhandled_processes = 0
+        self.unhandled_processes = 0
 
     def __repr__(self):
-        display_histplot(self.list_of_processes["old"])
+        # display_histplot(self.list_of_processes["old"])
         return "heja"
 
     def run(self, time):
@@ -21,7 +21,10 @@ class Disc:
                 return False
 
             self.find_current()
-            self.list_of_processes["waiting"].remove(self.current)
+            try:
+                self.list_of_processes["waiting"].remove(self.current)
+            except:
+                self.list_of_processes["priority"]["waiting"].remove(self.current)
 
         if self.current.location != self.location:
             self.move()

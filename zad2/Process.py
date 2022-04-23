@@ -1,8 +1,12 @@
+from random import random
+
+
 class Process:
     def __init__(self, arrival_time, location):
         self.location = location
         self.arrival_time = arrival_time
         self.waiting_time = 0
+        self.expiration_time = int(random() * 150)
 
     def __repr__(self):
         return str(self)
@@ -18,5 +22,3 @@ class Process:
         copy.arrival_time = self.arrival_time
         copy.waiting_time = 0
         return copy
-
-
