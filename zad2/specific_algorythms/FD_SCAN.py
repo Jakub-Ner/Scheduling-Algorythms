@@ -1,18 +1,12 @@
-from SSTF import SSTF
+from .SCAN import SCAN
 
 
-class EDF(SSTF):
+class FD_SCAN(SCAN):
     def __init__(self):
         super().__init__()
-        self.list_of_processes.update({"priority": {"waiting": [], "old": [], "new":[]}})
-
-    def __repr__(self):
-        SSTF.__repr__(self)
-        return " "
+        self.list_of_processes.update({"priority": {"waiting": [], "old": [], "new": []}})
 
     def find_current(self):
-        self.sort(self.list_of_processes["waiting"], self.list_of_processes["new"])
-
         if self.list_of_processes["priority"]["new"]:
             self.sort(self.list_of_processes["priority"]["waiting"], self.list_of_processes["priority"]["new"])
 
@@ -39,3 +33,12 @@ class EDF(SSTF):
 
         for t in trash:
             self.list_of_processes["priority"]["waiting"].remove(t)
+
+    def sort(self, list, new_list):
+        # bubble sort
+        for i in range(len(list) - 1):
+            for j in range(len(list) - 1 - i):
+                if abs(list[j].location - self.location) > abs(list[j + 1].location - self.location):
+                    list[j], list[j + 1] = list[j + 1], list[j]
+
+        super().sort(list, new_list)

@@ -1,5 +1,5 @@
-from Disc import Disc
-from CONSTANTS import SIZE
+from ..components.Disc import Disc
+from ..CONSTANTS import SIZE
 
 
 class SCAN(Disc):
@@ -7,12 +7,6 @@ class SCAN(Disc):
         super().__init__()
         self.direction = "left"
         self.list_of_processes.update({"new": []})
-
-    def __repr__(self):
-        print("--- SCAN ---")
-        print("total distance: ", self.distance)
-        Disc.__repr__(self)
-        return " "
 
     def helper_find_current(self):
         if self.direction == "right":
@@ -26,7 +20,7 @@ class SCAN(Disc):
         return self.list_of_processes["waiting"][index]
 
     def find_current(self):
-        self.sort()
+        self.sort(self.list_of_processes["waiting"], self.list_of_processes["new"])
         if self.list_of_processes["waiting"]:
             self.current = self.helper_find_current()
             return True
@@ -54,10 +48,10 @@ class SCAN(Disc):
             return False
         return True
 
-    def sort(self):
-        for new_element in self.list_of_processes["new"]:
-            self.binsearch(new_element, self.list_of_processes["waiting"])
-        self.list_of_processes["new"].clear()
+    def sort(self, list, new_list):
+        for new_element in new_list:
+            self.binsearch(new_element, list)
+        new_list.clear()
 
     def binsearch(self, element, list, insert=True):
         start = 0

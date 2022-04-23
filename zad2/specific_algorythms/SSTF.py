@@ -1,18 +1,10 @@
-from Disc import Disc
+from ..components.Disc import Disc
 
 
 class SSTF(Disc):
     def __init__(self):
         super().__init__()
         self.list_of_processes.update({"new": []})
-
-    def __repr__(self, **child):
-        if child:
-            if isinstance(child, SSTF):
-                print("--- SSTF ---")
-        print("total distance: ", self.distance)
-        Disc.__repr__(self)
-        return " "
 
     def has_next(self):
         if not (self.list_of_processes["waiting"] or self.list_of_processes["new"]):
@@ -34,16 +26,12 @@ class SSTF(Disc):
             self.location = -1
 
     def sort(self, list, new_list):
-        # bubble sort
-        for i in range(len(list) - 1):
-            for j in range(len(list) - 1 - i):
-                if abs(list[j].location - self.location) > abs(list[j + 1].location - self.location):
-                    list[j], list[j + 1] = list[j + 1], list[j]
 
-        # condition is needed at the beginning of the simulation
-        if len(list) == 0 and len(new_list) != 0:
-            list.append(new_list[0])
-            new_list.pop(0)
+
+        # # condition is needed at the beginning of the simulation
+        # if len(list) == 0 and len(new_list) != 0:
+        #     list.append(new_list[0])
+        #     new_list.pop(0)
 
         for new_element in new_list:
             self.binsearch(new_element, list)

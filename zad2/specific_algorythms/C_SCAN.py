@@ -1,4 +1,4 @@
-from SCAN import SCAN, SIZE
+from .SCAN import SCAN, SIZE
 
 
 class C_SCAN(SCAN):
@@ -18,7 +18,7 @@ class C_SCAN(SCAN):
         return self.list_of_processes["waiting"][index]
 
     def find_current(self):
-        self.sort()
+        self.sort(self.list_of_processes["waiting"], self.list_of_processes["new"])
         if self.list_of_processes["waiting"]:
             self.current = self.helper_find_current()
             return True

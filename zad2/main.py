@@ -1,19 +1,20 @@
 from random import random, randint, gauss
 
 from CONSTANTS import *
-from Process import Process
-from FCFS import FCFS
-from SSTF import SSTF
-from SCAN import SCAN
-from C_SCAN import C_SCAN
-from EDF import EDF
-from FD_SCAN import FD_SCAN
+from zad2.components.Process import Process
+from zad2.specific_algorythms.FCFS import FCFS
+from zad2.specific_algorythms.SSTF import SSTF
+from zad2.specific_algorythms.SCAN import SCAN
+from zad2.specific_algorythms.C_SCAN import C_SCAN
+from zad2.specific_algorythms.EDF import EDF
+from zad2.specific_algorythms.FD_SCAN import FD_SCAN
 
 FCFS = FCFS()
 SSTF = SSTF()
 SCAN = SCAN()
 C_SCAN = C_SCAN()
 EDF = EDF()
+FD_SCAN = FD_SCAN()
 
 number_all_of_processes = 0
 time = 0
@@ -35,8 +36,10 @@ def add_new_processes(iteration):
 
             if random() > 0.85:
                 EDF.list_of_processes["priority"]["new"].append(Process(time, location))
+                FD_SCAN.list_of_processes["priority"]["new"].append(Process(time, location))
             else:
                 EDF.list_of_processes["new"].append(Process(time, location))
+                FD_SCAN.list_of_processes["new"].append(Process(time, location))
 
 
 for location in [98, 183, 37, 122, 14, 124, 65, 67]:
@@ -51,45 +54,45 @@ for location in [98, 183, 37, 122, 14, 124, 65, 67]:
 if __name__ == '__main__':
 
     for i in range(1, N):
-        # FCFS.run(time)
-        # SSTF.run(time)
-        # SCAN.run(time)
-        # C_SCAN.run(time)
+        FCFS.run(time)
+        SSTF.run(time)
+        SCAN.run(time)
+        C_SCAN.run(time)
         # EDF.run(time)
         FD_SCAN.run(time)
         time += 1
-        add_new_processes(i)
+        # add_new_processes(i)
 
-    # temp = time
-    # while FCFS.run(time):
-    #     time += 1
-    #
-    # time = temp
-    # while SSTF.run(time):
-    #     time += 1
-    #
-    # time = temp
-    # while SCAN.run(time):
-    #     time += 1
+    temp = time
+    while FCFS.run(time):
+        time += 1
 
-    # time = temp
-    # while C_SCAN.run(time):
-    #     time += 1
+    time = temp
+    while SSTF.run(time):
+        time += 1
 
-    # time = temp
+    time = temp
+    while SCAN.run(time):
+        time += 1
+
+    time = temp
+    while C_SCAN.run(time):
+        time += 1
+
+    time = temp
     while EDF.run(time):
         time += 1
 
      # time = temp
-    while FD_SCAN.run(time):
-        time += 1
+    # while FD_SCAN.run(time):
+    #     time += 1
 
     print("number of processes: ", len(FD_SCAN.list_of_processes["old"]))
-    # print(FCFS)
-    # print(SSTF)
-    # print(SCAN)
-    # print(C_SCAN)
-    # print(EDF)
+    print(FCFS)
+    print(SSTF)
+    print(SCAN)
+    print(C_SCAN)
+    print(EDF)
     print(FD_SCAN)
 
 

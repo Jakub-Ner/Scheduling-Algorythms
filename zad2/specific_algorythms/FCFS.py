@@ -1,13 +1,7 @@
-from Disc import Disc
+from ..components.Disc import Disc
 
 
 class FCFS(Disc):
-    def __repr__(self):
-        print("--- FCFS ---")
-        print("total distance: ", self.distance)
-        Disc.__repr__(self)
-        return " "
-
     def find_current(self):
         self.current = self.list_of_processes["waiting"][0]
 
