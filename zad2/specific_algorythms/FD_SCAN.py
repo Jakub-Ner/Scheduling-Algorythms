@@ -4,24 +4,33 @@ from .SCAN import SCAN
 class FD_SCAN(SCAN):
     def __init__(self):
         super().__init__()
+        self.current_priority = None
         self.list_of_processes.update({"priority": {"waiting": [], "old": [], "new": []}})
 
     def find_current(self):
+        self.sort(self.list_of_processes["waiting"], self.list_of_processes["new"])
+
         if self.list_of_processes["priority"]["new"]:
             self.sort(self.list_of_processes["priority"]["waiting"], self.list_of_processes["priority"]["new"])
 
             if self.list_of_processes["priority"]["waiting"]:
-                self.current = self.list_of_processes["priority"]["waiting"][0]
+                self.current_priority = self.list_of_processes["priority"]["waiting"][0]
                 return True
 
-        elif self.list_of_processes["waiting"]:
+        if self.list_of_processes["waiting"]:
             self.current = self.list_of_processes["waiting"][0]
             return True
         else:
             return False
 
     def move(self):
-        super().move()
+        if self.current_priority and self.current_priority.location == self.location:
+            self.current.execute(0)  # <-change
+            self.list_of_processes["priority"]["old"].append(self.current_priority)
+            self.current_priority = None
+        else:
+            super().move()
+
         trash = []
         for process in self.list_of_processes["priority"]["waiting"]:
             process.expiration_time -= 1

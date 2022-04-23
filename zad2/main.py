@@ -23,7 +23,7 @@ time = 0
 def add_new_processes(iteration):
     global number_all_of_processes
 
-    if random() > 0.99:
+    if random() > 0.90:
         number_of_new_processes = int(gauss(10, 3))
         number_all_of_processes += number_of_new_processes
 
@@ -48,53 +48,51 @@ for location in [98, 183, 37, 122, 14, 124, 65, 67]:
     SCAN.list_of_processes["new"].append(Process(time, location))
     C_SCAN.list_of_processes["new"].append(Process(time, location))
 
-
 # def main():
 # global time
 if __name__ == '__main__':
 
     for i in range(1, N):
-        FCFS.run(time)
-        SSTF.run(time)
-        SCAN.run(time)
-        C_SCAN.run(time)
+        # FCFS.run(time)
+        # SSTF.run(time)
+        # SCAN.run(time)
+        # C_SCAN.run(time)
         # EDF.run(time)
         FD_SCAN.run(time)
         time += 1
-        # add_new_processes(i)
-
-    temp = time
-    while FCFS.run(time):
-        time += 1
-
-    time = temp
-    while SSTF.run(time):
-        time += 1
-
-    time = temp
-    while SCAN.run(time):
-        time += 1
-
-    time = temp
-    while C_SCAN.run(time):
-        time += 1
-
-    time = temp
-    while EDF.run(time):
-        time += 1
-
-     # time = temp
-    # while FD_SCAN.run(time):
+        add_new_processes(i)
+    #
+    # temp = time
+    # while FCFS.run(time):
     #     time += 1
+    #
+    # time = temp
+    # while SSTF.run(time):
+    #     time += 1
+    #
+    # time = temp
+    # while SCAN.run(time):
+    #     time += 1
+    #
+    # time = temp
+    # while C_SCAN.run(time):
+    #     time += 1
+    #
+    # time = temp
+    # while EDF.run(time):
+    #     time += 1
+    #
+    # time = temp
+    while FD_SCAN.run(time):
+        time += 1
 
     print("number of processes: ", len(FD_SCAN.list_of_processes["old"]))
-    print(FCFS)
-    print(SSTF)
-    print(SCAN)
-    print(C_SCAN)
-    print(EDF)
+    # print(FCFS)
+    # print(SSTF)
+    # print(SCAN)
+    # print(C_SCAN)
+    # print(EDF)
     print(FD_SCAN)
 
-
 # if __name__ == '__main__':
-    # main()
+# main()
