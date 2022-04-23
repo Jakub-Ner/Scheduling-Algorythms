@@ -6,8 +6,10 @@ class SSTF(Disc):
         super().__init__()
         self.list_of_processes.update({"new": []})
 
-    def __repr__(self):
-        print("--- SSTF ---")
+    def __repr__(self, **child):
+        if child:
+            if isinstance(child, SSTF):
+                print("--- SSTF ---")
         print("total distance: ", self.distance)
         Disc.__repr__(self)
         return " "

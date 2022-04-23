@@ -11,7 +11,7 @@ class Disc:
         self.unhandled_processes = 0
 
     def __repr__(self):
-        # display_histplot(self.list_of_processes["old"])
+        display_histplot(self.list_of_processes["old"])
         return "heja"
 
     def run(self, time):

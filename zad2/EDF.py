@@ -6,6 +6,10 @@ class EDF(SSTF):
         super().__init__()
         self.list_of_processes.update({"priority": {"waiting": [], "old": [], "new":[]}})
 
+    def __repr__(self):
+        SSTF.__repr__(self)
+        return " "
+
     def find_current(self):
         self.sort(self.list_of_processes["waiting"], self.list_of_processes["new"])
 
@@ -31,6 +35,7 @@ class EDF(SSTF):
             if process.expiration_time < 0:
                 self.unhandled_processes += 1
                 self.list_of_processes["priority"]["old"].append(process)
+                trash.append(process)
 
-        for t in self.list_of_processes["priority"]["old"]:
+        for t in trash:
             self.list_of_processes["priority"]["waiting"].remove(t)

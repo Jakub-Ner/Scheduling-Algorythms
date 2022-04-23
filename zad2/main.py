@@ -7,6 +7,7 @@ from SSTF import SSTF
 from SCAN import SCAN
 from C_SCAN import C_SCAN
 from EDF import EDF
+from FD_SCAN import FD_SCAN
 
 FCFS = FCFS()
 SSTF = SSTF()
@@ -45,14 +46,17 @@ for location in [98, 183, 37, 122, 14, 124, 65, 67]:
     C_SCAN.list_of_processes["new"].append(Process(time, location))
 
 
-def main():
-    global time
+# def main():
+# global time
+if __name__ == '__main__':
+
     for i in range(1, N):
         # FCFS.run(time)
         # SSTF.run(time)
         # SCAN.run(time)
         # C_SCAN.run(time)
-        EDF.run(time)
+        # EDF.run(time)
+        FD_SCAN.run(time)
         time += 1
         add_new_processes(i)
 
@@ -76,13 +80,18 @@ def main():
     while EDF.run(time):
         time += 1
 
-    print("number of processes: ", len(EDF.list_of_processes["old"]))
+     # time = temp
+    while FD_SCAN.run(time):
+        time += 1
+
+    print("number of processes: ", len(FD_SCAN.list_of_processes["old"]))
     # print(FCFS)
     # print(SSTF)
     # print(SCAN)
     # print(C_SCAN)
-    print(EDF)
+    # print(EDF)
+    print(FD_SCAN)
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+    # main()
