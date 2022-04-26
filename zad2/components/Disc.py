@@ -13,6 +13,8 @@ class Disc:
     def __repr__(self):
         print("---", type(self).__name__, " ---")
         print("total distance: ", self.distance)
+        print("unhandeled processes:", self.unhandled_processes)
+
         display_histplot(self.list_of_processes["old"])
         return ""
 

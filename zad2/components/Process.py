@@ -2,11 +2,12 @@ from random import random
 
 
 class Process:
-    def __init__(self, arrival_time, location):
+    def __init__(self, arrival_time, location, priority=False):
         self.location = location
         self.arrival_time = arrival_time
         self.waiting_time = 0
-        self.expiration_time = int(random() * 150)
+        self.expiration_time = int(random() * 100000)
+        self.priority = priority
 
     def __repr__(self):
         return str(self)

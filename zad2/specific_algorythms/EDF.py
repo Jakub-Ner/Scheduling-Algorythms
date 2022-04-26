@@ -4,13 +4,18 @@ from .SSTF import SSTF
 class EDF(SSTF):
     def __init__(self):
         super().__init__()
-        self.list_of_processes.update({"priority": {"waiting": [], "old": [], "new":[]}})
+        self.list_of_processes.update({"priority": {"waiting": [], "old": [], "new": []}})
+
+    def __repr__(self):
+        super().__repr__()
+        return ""
 
     def find_current(self):
         self.sort(self.list_of_processes["waiting"], self.list_of_processes["new"])
 
         if self.list_of_processes["priority"]["new"]:
-            self.sort(self.list_of_processes["priority"]["waiting"], self.list_of_processes["priority"]["new"])
+            self.sort(self.list_of_processes["priority"]["waiting"], self.list_of_processes["priority"]["new"],
+                      lambda x: x.expiration_time)
 
             if self.list_of_processes["priority"]["waiting"]:
                 self.current = self.list_of_processes["priority"]["waiting"][0]

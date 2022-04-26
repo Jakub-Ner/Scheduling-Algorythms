@@ -7,14 +7,12 @@ from zad2.specific_algorythms.SSTF import SSTF
 from zad2.specific_algorythms.SCAN import SCAN
 from zad2.specific_algorythms.C_SCAN import C_SCAN
 from zad2.specific_algorythms.EDF import EDF
-from zad2.specific_algorythms.FD_SCAN import FD_SCAN
 
 FCFS = FCFS()
 SSTF = SSTF()
 SCAN = SCAN()
 C_SCAN = C_SCAN()
 EDF = EDF()
-FD_SCAN = FD_SCAN()
 
 number_all_of_processes = 0
 time = 0
@@ -23,7 +21,7 @@ time = 0
 def add_new_processes(iteration):
     global number_all_of_processes
 
-    if random() > 0.99:
+    if random() > 0.98:
         number_of_new_processes = int(gauss(10, 3))
         number_all_of_processes += number_of_new_processes
 
@@ -36,10 +34,8 @@ def add_new_processes(iteration):
 
             if random() > 0.85:
                 EDF.list_of_processes["priority"]["new"].append(Process(time, location))
-                FD_SCAN.list_of_processes["priority"]["new"].append(Process(time, location))
             else:
-                EDF.list_of_processes["new"].append(Process(time, location))
-                FD_SCAN.list_of_processes["new"].append(Process(time, location))
+                EDF.list_of_processes["new"].append(Process(time, location, True))
 
 
 for location in [98, 183, 37, 122, 14, 124, 65, 67]:
@@ -47,7 +43,6 @@ for location in [98, 183, 37, 122, 14, 124, 65, 67]:
     SSTF.list_of_processes["new"].append(Process(time, location))
     SCAN.list_of_processes["new"].append(Process(time, location))
     C_SCAN.list_of_processes["new"].append(Process(time, location))
-
 
 # def main():
 # global time
@@ -58,10 +53,9 @@ if __name__ == '__main__':
         SSTF.run(time)
         SCAN.run(time)
         C_SCAN.run(time)
-        # EDF.run(time)
-        FD_SCAN.run(time)
+        EDF.run(time)
         time += 1
-        # add_new_processes(i)
+        add_new_processes(i)
 
     temp = time
     while FCFS.run(time):
@@ -83,18 +77,12 @@ if __name__ == '__main__':
     while EDF.run(time):
         time += 1
 
-     # time = temp
-    # while FD_SCAN.run(time):
-    #     time += 1
-
-    print("number of processes: ", len(FD_SCAN.list_of_processes["old"]))
+    print("number of processes: ", len(EDF.list_of_processes["old"]))
     print(FCFS)
     print(SSTF)
     print(SCAN)
     print(C_SCAN)
     print(EDF)
-    print(FD_SCAN)
-
 
 # if __name__ == '__main__':
-    # main()
+# main()
