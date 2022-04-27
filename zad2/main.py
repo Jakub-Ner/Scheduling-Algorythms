@@ -38,22 +38,15 @@ def add_new_processes(iteration):
                 EDF.list_of_processes["new"].append(Process(time, location, True))
 
 
-for location in [98, 183, 37, 122, 14, 124, 65, 67]:
-    FCFS.list_of_processes["waiting"].append(Process(time, location))
-    SSTF.list_of_processes["new"].append(Process(time, location))
-    SCAN.list_of_processes["new"].append(Process(time, location))
-    C_SCAN.list_of_processes["new"].append(Process(time, location))
-
-# def main():
-# global time
-if __name__ == '__main__':
-
+def run():
+    global time
     for i in range(1, N):
         FCFS.run(time)
         SSTF.run(time)
         SCAN.run(time)
         C_SCAN.run(time)
         EDF.run(time)
+
         time += 1
         add_new_processes(i)
 
@@ -76,6 +69,10 @@ if __name__ == '__main__':
     time = temp
     while EDF.run(time):
         time += 1
+
+
+if __name__ == '__main__':
+    run()
 
     print("number of processes: ", len(EDF.list_of_processes["old"]))
     print(FCFS)

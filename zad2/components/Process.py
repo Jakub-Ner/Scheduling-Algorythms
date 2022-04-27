@@ -6,7 +6,7 @@ class Process:
         self.location = location
         self.arrival_time = arrival_time
         self.waiting_time = 0
-        self.expiration_time = int(random() * 100000)
+        self.expiration_time = int(random() * 5_000)
         self.priority = priority
 
     def __repr__(self):
