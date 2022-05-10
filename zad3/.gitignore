@@ -1,0 +1,11 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+zad3/zad3.sln.DotSettings.user
+zad3.sln.DotSettings.user
+zad3.sln
+.idea
+zad3/zad3.csproj
+zad3/zad3.csproj.DotSettings

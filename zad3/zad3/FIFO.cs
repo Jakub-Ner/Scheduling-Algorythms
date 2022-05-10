@@ -1,0 +1,14 @@
+namespace zad3
+{
+    public class FIFO : Algorithm
+    {
+        private int _oldest = 0;
+        protected override void PageFault(int reference)
+        {
+            _oldest = _oldest % CONST.Frames;
+            var chosenOne = base._frames[_oldest];
+            
+            chosenOne.Reference = reference;
+        }
+    }
+}
