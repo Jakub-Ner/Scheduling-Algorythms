@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace zad3
@@ -14,14 +15,23 @@ namespace zad3
             for(int i=0; i< CONST.Frames; i++)
                 _frames.Add(new Frame(i));
         }
-        
+
+        public void display()
+        {
+            foreach (var frame in _frames)
+            {
+                Console.Write(frame.Reference + " ");
+            }
+
+            Console.WriteLine();
+        }
         protected int FindFrame(int reference)
         {
             foreach (var frame in _frames)
             {
                 if (frame.Reference == reference)
                 {
-                    frame.Reference = reference;
+                    frame.ReferenceBit = 1;
                     return frame.id;
                 }
                     
