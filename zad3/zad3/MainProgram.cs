@@ -12,6 +12,7 @@ namespace zad3
             FIFO fifo = new FIFO();
             OPT opt = new OPT(referenceList);
             LRU lru = new LRU(referenceList);
+            RAND rand = new RAND();
             
             generateReferenceList(referenceList);
             
@@ -19,10 +20,11 @@ namespace zad3
             {
                 // fifo.Run(reference);
                 // opt.Run(reference);
-                lru.Run(reference);
-                Console.WriteLine(lru.FaultCounter);
+                // lru.Run(reference);
+                rand.Run(reference);
+                Console.WriteLine(rand.FaultCounter);
             }
-            Console.WriteLine("\nkoniec: "+ lru.FaultCounter);
+            Console.WriteLine("\nkoniec: "+ rand.FaultCounter);
         }
         
        static void generateReferenceList(List<int> l)
