@@ -11,17 +11,18 @@ namespace zad3
             
             FIFO fifo = new FIFO();
             OPT opt = new OPT(referenceList);
+            LRU lru = new LRU(referenceList);
             
             generateReferenceList(referenceList);
             
             foreach (int reference in referenceList)
             {
                 // fifo.Run(reference);
-                opt.Run(reference);
-                
-                Console.WriteLine(opt.FaultCounter);
+                // opt.Run(reference);
+                lru.Run(reference);
+                Console.WriteLine(lru.FaultCounter);
             }
-            Console.WriteLine("\nkoniec: "+ opt.FaultCounter);
+            Console.WriteLine("\nkoniec: "+ lru.FaultCounter);
         }
         
        static void generateReferenceList(List<int> l)
