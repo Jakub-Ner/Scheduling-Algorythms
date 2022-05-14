@@ -7,7 +7,7 @@ namespace zad3
         {
             _oldest = _oldest % CONST.Frames;
             var chosenOne = base._frames[_oldest];
-            
+            _oldest++;
             chosenOne.Reference = reference;
         }
     }

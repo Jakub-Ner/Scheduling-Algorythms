@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace zad3
 {
@@ -21,24 +19,30 @@ namespace zad3
         {
             foreach (var frame in _frames)
             {
-                if (frame.Free) return frame.id;
-                if (frame.Reference == reference) return frame.id;
+                if (frame.Reference == reference)
+                {
+                    frame.Reference = reference;
+                    return frame.id;
+                }
+                    
             }
+            _faultCounter++;
+            
+            foreach (var frame in _frames)
+                if (frame.Free)
+                {
+                    frame.Free = false;
+                    frame.Reference = reference;
+                    return frame.id;
+                }
             return -1;
         }
 
-        public void Run(int reference)
+        public virtual void Run(int reference)
         {
-            int tmp = FindFrame(reference);
-            if (tmp != -1)
-            {
-                _frames[tmp].Free = false;
-                _frames[tmp].Reference = reference;
-            }
-            else
+            if (FindFrame(reference) == -1)
             {
                 PageFault(reference);
-                _faultCounter++;
             }
         }
 
