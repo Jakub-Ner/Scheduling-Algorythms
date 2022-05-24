@@ -7,7 +7,7 @@ namespace zad3
     {
         public static void Main(string[] args)
         {
-            List<int> referenceList = new List<int>();
+            int[] referenceList = new GenerateRefList().generateReferenceList();
 
             FIFO fifo = new FIFO();
             OPT opt = new OPT(referenceList);
@@ -15,7 +15,6 @@ namespace zad3
             aLRU alru = new aLRU();
             RAND rand = new RAND();
 
-            GenerateRefList.generateReferenceList(referenceList);
 
             foreach (int reference in referenceList)
             {

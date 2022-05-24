@@ -6,10 +6,10 @@ namespace zad3
 {
     public class OPT : Algorithm
     {
-        private List<int> _referenceList;
+        private int[] _referenceList;
         private int _currentTime = 0;
 
-        public OPT(List<int> referenceList)
+        public OPT(int[] referenceList)
         {
             _referenceList = referenceList;
         }
@@ -25,7 +25,7 @@ namespace zad3
             List<Frame> helper = new List<Frame>(_frames);
 
             int i = _currentTime + 1;
-            while (i < _referenceList.Count)
+            while (i < _referenceList.Length)
             {
                 foreach (var frame in helper)
                 {

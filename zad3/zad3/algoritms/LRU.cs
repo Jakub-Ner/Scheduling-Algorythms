@@ -4,10 +4,10 @@ namespace zad3
 {
     public class LRU : Algorithm
     {
-        private List<int> _referenceList;
+        private int[] _referenceList;
         private int _currentTime = 0;
 
-        public LRU(List<int> referenceList)
+        public LRU(int[] referenceList)
         {
             _referenceList = referenceList;
         }
