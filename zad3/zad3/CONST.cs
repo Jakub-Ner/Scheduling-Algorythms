@@ -5,7 +5,7 @@ namespace zad3
 {
     public static class CONST
     {
-        public static int Frames => 2; // <- the higher, the closest results
+        // public static int Frames => 2; // <- the higher, the closest results
         public static int DistanceOfReferenceLocality => 5;
         public static int SizeOfBaseReferenceLocality => 3;
         public static double chanceOfLocality => 0.3;

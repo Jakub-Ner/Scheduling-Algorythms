@@ -8,10 +8,10 @@ namespace zad3
     {
         private Reference[] _referenceList;
         private int _currentTime = 0;
-
-        public OPT(Reference[] referenceList)
+        
+        public OPT()
         {
-            _referenceList = referenceList;
+            _referenceList = MainProgram.referenceList;
         }
 
         public override void Run(Reference reference)
@@ -22,7 +22,7 @@ namespace zad3
 
         protected override void PageFault(Reference reference)
         {
-            List<Frame> helper = new List<Frame>(_frames);
+            List<Frame> helper = new List<Frame>(reference.parent.Frames);
 
             int i = _currentTime + 1;
             while (i < _referenceList.Length)

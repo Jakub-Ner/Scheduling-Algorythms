@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace zad3
 {
@@ -22,19 +23,21 @@ namespace zad3
         private Reference[] shuffleProcesses()
         {
             Reference[] referenceList = new Reference[ReferenceNum];
-
+            List<int> aliveLists = Enumerable.Range(0, processesList.Count).ToList();
+                
             for (int i = 0; i < ReferenceNum; i++)
             {
-                int indexOfNext = new Random().Next(processesList.Count);
+                int indexOfNext = aliveLists[new Random().Next(aliveLists.Count)];
                 if (!processesList[indexOfNext].hasNext())
                 {
-                    processesList.Remove(processesList[indexOfNext]);
-                    indexOfNext = new Random().Next(processesList.Count);
+                    aliveLists.Remove(indexOfNext); // <- aliveLists[x] = indexOfNext
+                    indexOfNext = aliveLists[new Random().Next(aliveLists.Count)];
                 }
 
                 referenceList[i] = new Reference(processesList[indexOfNext]);
             }
 
+            processesList.ForEach(process => process.references = null);
             return referenceList;
         }
 

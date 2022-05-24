@@ -6,7 +6,7 @@ namespace zad3
         {
             for (int i = 0; i < 2; i++)
             {
-                foreach (var frame in _frames)
+                foreach (var frame in reference.parent.Frames)
                 {
                     if (frame.ReferenceBit == 0)
                     {

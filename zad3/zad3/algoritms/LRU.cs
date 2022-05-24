@@ -7,11 +7,12 @@ namespace zad3
         private Reference[] _referenceList;
         private int _currentTime = 0;
 
-        public LRU(Reference[] referenceList)
+        public LRU()
         {
-            _referenceList = referenceList;
+            _referenceList = MainProgram.referenceList;
         }
-
+        
+        
         public override void Run(Reference reference)
         {
             base.Run(reference);
@@ -20,7 +21,7 @@ namespace zad3
 
         protected override void PageFault(Reference reference)
         {
-            List<Frame> helper = new List<Frame>(_frames);
+            List<Frame> helper = new List<Frame>(reference.parent.Frames);
 
             int i = _currentTime - 1;
             while (i > 0)

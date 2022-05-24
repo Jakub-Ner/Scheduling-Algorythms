@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
-namespace zad3{
-
-public class Process
+namespace zad3
 {
+    public class Process
+    {
         public int[] references;
         private int next = 0;
         public List<Frame> Frames = new List<Frame>();
@@ -18,5 +18,6 @@ public class Process
             next++;
             return references[next - 1];
         }
+        
     };
 }

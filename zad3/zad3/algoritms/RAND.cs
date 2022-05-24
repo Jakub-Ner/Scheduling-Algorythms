@@ -6,7 +6,8 @@ namespace zad3
     {
         protected override void PageFault(Reference reference)
         {
-            _frames[new Random().Next(CONST.Frames)].Reference = reference.value;
+            int framesCount = reference.parent.Frames.Count;
+            reference.parent.Frames[new Random().Next(framesCount)].Reference = reference.value;
         }
     }
 }
