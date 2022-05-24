@@ -4,7 +4,7 @@ namespace zad3
     {
         protected override void PageFault(int reference)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
             {
                 foreach (var frame in _frames)
                 {
@@ -14,9 +14,7 @@ namespace zad3
                         frame.ReferenceBit = 1;
                         return;
                     }
-
-                    if (i > 0)
-                        frame.ReferenceBit = 0;
+                    frame.ReferenceBit = 0;
                 }
             }
         }
