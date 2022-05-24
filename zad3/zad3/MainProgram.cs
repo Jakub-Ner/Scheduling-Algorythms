@@ -7,7 +7,7 @@ namespace zad3
     {
         public static void Main(string[] args)
         {
-            int[] referenceList = new GenerateRefList().generateReferenceList();
+            Reference[] referenceList = new GenerateRefList().generateReferenceList();
 
             FIFO fifo = new FIFO();
             OPT opt = new OPT(referenceList);
@@ -16,7 +16,7 @@ namespace zad3
             RAND rand = new RAND();
 
 
-            foreach (int reference in referenceList)
+            foreach (var reference in referenceList)
             {
                 fifo.Run(reference);
                 opt.Run(reference);

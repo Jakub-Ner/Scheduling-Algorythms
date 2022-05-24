@@ -9,30 +9,30 @@ namespace zad3
         private int PagesNum;
         private int ReferenceNum = 0;
 
-        private List<Processes> processes = new List<Processes>(CONST.PagesNum.Count);
+        private static List<Process> processesList = new List<Process>(CONST.PagesNum.Count);
 
-        public int[] generateReferenceList()
+        public Reference[] generateReferenceList()
         {
             CONST.generate();
-            
+
             generateProcesses();
-             return shuffleProcesses();
+            return shuffleProcesses();
         }
 
-        private int[] shuffleProcesses()
+        private Reference[] shuffleProcesses()
         {
-            int[] referenceList = new int[ReferenceNum];
+            Reference[] referenceList = new Reference[ReferenceNum];
 
             for (int i = 0; i < ReferenceNum; i++)
             {
-                int indexOfNext = new Random().Next(processes.Count);
-                if (!processes[indexOfNext].hasNext())
+                int indexOfNext = new Random().Next(processesList.Count);
+                if (!processesList[indexOfNext].hasNext())
                 {
-                    processes.Remove(processes[indexOfNext]);
-                    indexOfNext = new Random().Next(processes.Count);
+                    processesList.Remove(processesList[indexOfNext]);
+                    indexOfNext = new Random().Next(processesList.Count);
                 }
 
-                referenceList[i] = processes[indexOfNext].getNext();
+                referenceList[i] = new Reference(processesList[indexOfNext]);
             }
 
             return referenceList;
@@ -47,14 +47,14 @@ namespace zad3
             for (int j = 0; j < CONST.ReferencesNum.Count; j++)
             {
                 size = 0;
-                processes.Add(new Processes());
-                processes[j].references = new int[CONST.ReferencesNum[j]];
+                processesList.Add(new Process());
+                processesList[j].references = new int[CONST.ReferencesNum[j]];
                 ReferenceNum += CONST.ReferencesNum[j];
                 maxIndex = minimalIndex + CONST.PagesNum[j];
 
                 for (i = 0; i < CONST.ReferencesNum[j]; i++)
                 {
-                    processes[j].references[i] = getRef(minimalIndex, maxIndex, i, j);
+                    processesList[j].references[i] = getRef(minimalIndex, maxIndex, i, j);
                 }
 
                 minimalIndex += CONST.PagesNum[j];
@@ -77,30 +77,13 @@ namespace zad3
                 if (numOfElements < CONST.DistanceOfReferenceLocality)
                     minimalIndex = 0;
                 else minimalIndex = numOfElements - CONST.DistanceOfReferenceLocality;
-                
+
                 int index = new Random().Next(minimalIndex, numOfElements);
-                return processes[j].references[index];
+                return processesList[j].references[index];
             }
 
             return new Random().Next(min, max);
         }
 
-
-        class Processes
-        {
-            public int[] references;
-            private int next = 0;
-
-            public bool hasNext()
-            {
-                return next < references.Length;
-            }
-
-            public int getNext()
-            {
-                next++;
-                return references[next - 1];
-            }
-        };
     }
 }

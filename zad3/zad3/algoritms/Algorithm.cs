@@ -25,11 +25,11 @@ namespace zad3
 
             Console.WriteLine();
         }
-        protected int FindFrame(int reference)
+        protected int FindFrame(Reference reference)
         {
             foreach (var frame in _frames)
             {
-                if (frame.Reference == reference)
+                if (frame.Reference == reference.value)
                 {
                     frame.ReferenceBit = 1;
                     return frame.id;
@@ -42,13 +42,13 @@ namespace zad3
                 if (frame.Free)
                 {
                     frame.Free = false;
-                    frame.Reference = reference;
+                    frame.Reference = reference.value;
                     return frame.id;
                 }
             return -1;
         }
 
-        public virtual void Run(int reference)
+        public virtual void Run(Reference reference)
         {
             if (FindFrame(reference) == -1)
             {
@@ -56,6 +56,6 @@ namespace zad3
             }
         }
 
-        protected abstract void PageFault(int reference);
+        protected abstract void PageFault(Reference reference);
     }
 }

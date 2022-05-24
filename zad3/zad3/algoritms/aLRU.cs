@@ -2,7 +2,7 @@ namespace zad3
 {
     public class aLRU : Algorithm
     {
-        protected override void PageFault(int reference)
+        protected override void PageFault(Reference reference)
         {
             for (int i = 0; i < 2; i++)
             {
@@ -10,7 +10,7 @@ namespace zad3
                 {
                     if (frame.ReferenceBit == 0)
                     {
-                        frame.Reference = reference;
+                        frame.Reference = reference.value;
                         frame.ReferenceBit = 1;
                         return;
                     }

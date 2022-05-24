@@ -4,21 +4,21 @@ namespace zad3
 {
     public class LRU : Algorithm
     {
-        private int[] _referenceList;
+        private Reference[] _referenceList;
         private int _currentTime = 0;
 
-        public LRU(int[] referenceList)
+        public LRU(Reference[] referenceList)
         {
             _referenceList = referenceList;
         }
 
-        public override void Run(int reference)
+        public override void Run(Reference reference)
         {
             base.Run(reference);
             _currentTime++;
         }
 
-        protected override void PageFault(int reference)
+        protected override void PageFault(Reference reference)
         {
             List<Frame> helper = new List<Frame>(_frames);
 
@@ -29,11 +29,11 @@ namespace zad3
                 {
                     if (helper.Count == 1)
                     {
-                        helper[0].Reference = reference;
+                        helper[0].Reference = reference.value;
                         return;
                     }
 
-                    if (_referenceList[i] == frame.Reference)
+                    if (_referenceList[i].value == frame.Reference)
                     {
                         helper.Remove(frame);
                         break;
