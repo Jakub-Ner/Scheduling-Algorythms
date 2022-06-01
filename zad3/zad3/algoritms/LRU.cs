@@ -1,17 +1,25 @@
 using System.Collections.Generic;
+using System.ComponentModel;
+using zad3.AllocationOfFrames;
 
 namespace zad3
 {
     public class LRU : Algorithm
     {
-        private Reference[] _referenceList;
-        private int _currentTime = 0;
+        private Reference[] _referenceList; 
+        int _currentTime = 0;
 
         public LRU()
         {
             _referenceList = MainProgram.referenceList;
         }
-        
+
+        public override void init(Allocation allocation)
+        {
+            _currentTime = 0;
+            _referenceList = MainProgram.referenceList;
+            base.init(allocation);
+        }
         
         public override void Run(Reference reference)
         {

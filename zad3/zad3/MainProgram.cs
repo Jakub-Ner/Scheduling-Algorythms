@@ -1,4 +1,5 @@
 ﻿using System;
+using zad3.AllocationOfFrames;
 
 namespace zad3
 {
@@ -8,26 +9,56 @@ namespace zad3
         
         public static void Main(string[] args)
         {
-            referenceList = new GenerateRefList().generateReferenceList();
+            GenerateRefList generate = new GenerateRefList();
+            referenceList = generate.generateReferenceList();
+            
+            Reference[] cpy = referenceList.Clone() as Reference[];
+            
             Algorithm[] algorithms = new Algorithm[]
-                {
-                    new FIFO(), // 0
-                    new OPT(),  // 1
-                    new LRU(),  // 2
-                    new aLRU(), // 3
-                    new RAND()  // 4
-                };
+            {
+                new LRU(),  // 0
+                // new FIFO(), // 1
+                // new OPT(),  // 2
+                // new aLRU(), // 3
+                // new RAND()  // 4
+            };
+            Allocation[] allocations = new Allocation[]
+            {
+                new Equal(),
+                // new Proportional(),
+                new Managed()
+            };
 
+            // foreach (var algorithm in algorithms)
+            //     Console.Write($"\t{algorithm.GetType().Name, 10}");
+            // Console.WriteLine();
 
-            foreach (var reference in referenceList)
+            Console.Clear();
+            foreach (var allocation in allocations)
+            {
+                Console.Write("{0, -10}",allocation.GetType().Name);
+                
+                // all algorithms are initialized
+                // algorithms[0].init(allocation);
                 foreach (var algorithm in algorithms)
                 {
-                    algorithm.Run(reference);
+                    referenceList = cpy.Clone() as Reference[];
+                    algorithm.init(allocation);
+                    foreach (var reference in referenceList)
+                    {
+                        algorithm.Run(reference);
+                    }
                 }
+                    
 
-            foreach (var algorithm in algorithms)
-                Console.WriteLine("\n"+ algorithm.GetType().Name + ": " + algorithm.FaultCounter);
-
+                foreach (var algorithm in algorithms)
+                    Console.Write($"\t{algorithm.FaultCounter, 2}");
+                Console.WriteLine();
+            }
+            
+            Console.WriteLine("\nliczba procesow: " + CONST.PagesNum.Count);
+            Console.WriteLine("\nliczba odwołań: " + generate.ReferenceNum);
+            Console.WriteLine("liczba różych stron: " + generate.PagesSum);
         }
         
     }

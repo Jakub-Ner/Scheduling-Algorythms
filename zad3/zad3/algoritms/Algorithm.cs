@@ -1,21 +1,22 @@
 using System;
-using System.Collections.Generic;
+using zad3.AllocationOfFrames;
 
 namespace zad3
 {
     public abstract class Algorithm
     {
-       // protected List<Frame> _frames = new List<Frame>();
-        private int _faultCounter; 
+        private int _faultInRow;
+        private int _faultCounter;
         public int FaultCounter => _faultCounter;
+        protected Allocation _allocation;
 
-        // protected Algorithm()
-        // {
-        //     _faultCounter = 0;
-        //     for(int i=0; i< CONST.Frames; i++)
-        //         _frames.Add(new Frame(i));
-        // }
-
+        public virtual void init(Allocation allocation)
+        {
+            _faultInRow = 0;
+            _faultCounter = 0;
+            _allocation = allocation;
+            _allocation.init(CONST.Frames);
+        }
 
         protected int FindFrame(Reference reference)
         {
@@ -23,13 +24,13 @@ namespace zad3
             {
                 if (frame.Reference == reference.value)
                 {
+                    _faultInRow = 0;
                     frame.ReferenceBit = 1;
                     return frame.id;
                 }
-                    
             }
-            _faultCounter++;
-            
+            increaseFaultCounter(reference.parent);
+
             foreach (var frame in reference.parent.Frames)
                 if (frame.Free)
                 {
@@ -40,12 +41,32 @@ namespace zad3
             return -1;
         }
 
+        protected void increaseFaultCounter(Process parent)
+        {
+            _faultInRow++;
+            if (_faultInRow > CONST.SCUFLE)
+            {
+                Console.Write("SZAMOTANIE!!!");
+                _faultInRow = 0;
+            }
+            _faultCounter++;
+            parent.errors++;
+        }
+
         public virtual void Run(Reference reference)
         {
             if (FindFrame(reference) == -1)
             {
                 PageFault(reference);
             }
+
+            if (reference.parent.lastReference == reference)
+            {
+                int freedFrames = reference.parent.Frames.Count;
+                GenerateRefList.processesList.Remove(reference.parent);
+                _allocation.init(freedFrames);
+            }
+            _allocation.adjustFrames(reference.parent);
         }
 
         protected abstract void PageFault(Reference reference);
