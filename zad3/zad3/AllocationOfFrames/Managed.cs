@@ -74,9 +74,9 @@ namespace zad3.AllocationOfFrames
 
                 while (surplus > 0)
                 {
+                    if (waitingProcesses.Count == 0) return;
                     giveFrame(waitingProcesses[0], true);
                     waitingProcesses.Remove(waitingProcesses[0]);
-                    if (waitingProcesses.Count == 0) return;
                 }
             }
         }
