@@ -25,7 +25,7 @@ namespace zad3
             Allocation[] allocations = new Allocation[]
             {
                 new Equal(),
-                // new Proportional(),
+                new Proportional(),
                 new Managed()
             };
 
@@ -53,9 +53,9 @@ namespace zad3
 
                 foreach (var algorithm in algorithms)
                     Console.Write($"\t{algorithm.FaultCounter, 2}");
-                Console.WriteLine();
+                // Console.WriteLine((Managed)algorithms[2].sleep);
             }
-            
+
             Console.WriteLine("\nliczba procesow: " + CONST.PagesNum.Count);
             Console.WriteLine("\nliczba odwołań: " + generate.ReferenceNum);
             Console.WriteLine("liczba różych stron: " + generate.PagesSum);

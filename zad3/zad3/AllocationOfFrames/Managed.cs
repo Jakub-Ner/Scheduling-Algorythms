@@ -10,7 +10,8 @@ namespace zad3.AllocationOfFrames
         private const double L = 0.3;
         private const double U = 0.8;
         private const int TIME = 100;
-
+        public int sleep = 0;
+        
         private List<Process> freezedProcesses;
         private int _time;
 
@@ -67,6 +68,7 @@ namespace zad3.AllocationOfFrames
 
                 // maybe we should freeze some processes?
                 Console.Write("USYPIANIE ");
+                sleep++;
                 surplus += waitingProcesses[0].Frames.Count;
                 freezedProcesses.Add(waitingProcesses[0].Copy());
                 processesList.Remove(waitingProcesses[0]);
