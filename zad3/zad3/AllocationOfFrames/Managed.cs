@@ -72,9 +72,11 @@ namespace zad3.AllocationOfFrames
                 processesList.Remove(waitingProcesses[0]);
                 waitingProcesses.Remove(waitingProcesses[0]);
 
-                while (surplus >= 0)
+                while (surplus > 0)
                 {
                     giveFrame(waitingProcesses[0], true);
+                    waitingProcesses.Remove(waitingProcesses[0]);
+                    if (waitingProcesses.Count == 0) return;
                 }
             }
         }
