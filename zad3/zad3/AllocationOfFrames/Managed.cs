@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using static zad3.GenerateRefList;
 
 namespace zad3.AllocationOfFrames
 {
     public class Managed : Proportional
     {
+        
         private const double L = 0.3;
         private const double U = 0.8;
-        private const int TIME = 100;
+        private const int TIME = 1000;
         public int sleep = 0;
+        private int _sleepCounter = 0;
+        public int SleepCounter => _sleepCounter;
         
         private List<Process> freezedProcesses;
         private int _time;
@@ -67,7 +69,7 @@ namespace zad3.AllocationOfFrames
                 }
 
                 // maybe we should freeze some processes?
-                Console.Write("USYPIANIE ");
+                _sleepCounter++;
                 sleep++;
                 surplus += waitingProcesses[0].Frames.Count;
                 freezedProcesses.Add(waitingProcesses[0].Copy());

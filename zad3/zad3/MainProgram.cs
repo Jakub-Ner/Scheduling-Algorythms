@@ -6,17 +6,17 @@ namespace zad3
     internal static class MainProgram
     {
         internal static Reference[] referenceList;
-        
+
         public static void Main(string[] args)
         {
             GenerateRefList generate = new GenerateRefList();
             referenceList = generate.generateReferenceList();
-            
+
             Reference[] cpy = referenceList.Clone() as Reference[];
-            
+
             Algorithm[] algorithms = new Algorithm[]
             {
-                new LRU(),  // 0
+                new LRU(), // 0
                 // new FIFO(), // 1
                 // new OPT(),  // 2
                 // new aLRU(), // 3
@@ -36,8 +36,8 @@ namespace zad3
             Console.Clear();
             foreach (var allocation in allocations)
             {
-                Console.Write("{0, -10}",allocation.GetType().Name);
-                
+                Console.Write("{0, -10}", allocation.GetType().Name);
+
                 // all algorithms are initialized
                 // algorithms[0].init(allocation);
                 foreach (var algorithm in algorithms)
@@ -49,17 +49,19 @@ namespace zad3
                         algorithm.Run(reference);
                     }
                 }
-                    
 
                 foreach (var algorithm in algorithms)
-                    Console.Write($"\t{algorithm.FaultCounter, 2}");
-                // Console.WriteLine((Managed)algorithms[2].sleep);
+                {
+                    Console.Write($"Błędow strony: \t{algorithm.FaultCounter,2}");
+                    Console.Write($"; Szamotań: {algorithm.ScufleCounter}");
+                    if (allocation is Managed)
+                        Console.Write($"; Usypień: {((Managed)allocation).SleepCounter}\n");
+                    Console.WriteLine();
+                }
             }
 
             Console.WriteLine("\nliczba procesow: " + CONST.PagesNum.Count);
             Console.WriteLine("\nliczba odwołań: " + generate.ReferenceNum);
-            Console.WriteLine("liczba różych stron: " + generate.PagesSum);
         }
-        
     }
 }

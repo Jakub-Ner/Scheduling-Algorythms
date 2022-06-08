@@ -6,12 +6,15 @@ namespace zad3
     public abstract class Algorithm
     {
         private int _faultInRow;
+        private int _scufleCounter;
         private int _faultCounter;
         public int FaultCounter => _faultCounter;
+        public int ScufleCounter => _scufleCounter;
         protected Allocation _allocation;
 
         public virtual void init(Allocation allocation)
         {
+            _scufleCounter = 0;
             _faultInRow = 0;
             _faultCounter = 0;
             _allocation = allocation;
@@ -46,7 +49,7 @@ namespace zad3
             _faultInRow++;
             if (_faultInRow > CONST.SCUFLE)
             {
-                Console.Write("SZAMOTANIE!!!");
+                _scufleCounter++;
                 _faultInRow = 0;
             }
             _faultCounter++;
