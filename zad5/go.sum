@@ -1,0 +1,4 @@
+github.com/krux02/turnt-octo-wallhack v0.0.0-20161120153028-1ff9034d43ae h1:JBFr4JX+GmGLdCRCCEgTrmKhbKzJfpMHIXdM5ZoK7is=
+github.com/krux02/turnt-octo-wallhack v0.0.0-20161120153028-1ff9034d43ae/go.mod h1:WDJxe26YTv3DUas5r6Z/8AvYw4EcSQk0XF3DYwSpEYI=
+golang.org/x/tour v0.1.0 h1:OWzbINRoGf1wwBhKdFDpYwM88NM0d1SL/Nj6PagS6YE=
+golang.org/x/tour v0.1.0/go.mod h1:DUZC6G8mR1AXgXy73r8qt/G5RsefKIlSj6jBMc8b9Wc=
