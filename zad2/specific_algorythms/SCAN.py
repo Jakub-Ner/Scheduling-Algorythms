@@ -1,5 +1,5 @@
-from ..components.Disc import Disc
-from ..CONSTANTS import SIZE
+from components.Disc import Disc
+from CONSTANTS import SIZE
 
 
 class SCAN(Disc):

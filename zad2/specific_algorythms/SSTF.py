@@ -1,4 +1,4 @@
-from ..components.Disc import Disc
+from components.Disc import Disc
 
 
 class SSTF(Disc):

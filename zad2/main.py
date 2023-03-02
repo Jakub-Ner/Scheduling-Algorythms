@@ -1,12 +1,12 @@
 from random import random, randint, gauss
 
 from CONSTANTS import *
-from zad2.components.Process import Process
-from zad2.specific_algorythms.FCFS import FCFS
-from zad2.specific_algorythms.SSTF import SSTF
-from zad2.specific_algorythms.SCAN import SCAN
-from zad2.specific_algorythms.C_SCAN import C_SCAN
-from zad2.specific_algorythms.EDF import EDF
+from components.Process import Process
+from specific_algorythms.FCFS import FCFS
+from specific_algorythms.SSTF import SSTF
+from specific_algorythms.SCAN import SCAN
+from specific_algorythms.C_SCAN import C_SCAN
+from specific_algorythms.EDF import EDF
 
 FCFS = FCFS()
 SSTF = SSTF()
