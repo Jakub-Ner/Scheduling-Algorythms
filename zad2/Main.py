@@ -80,6 +80,3 @@ if __name__ == '__main__':
     print(SCAN)
     print(C_SCAN)
     print(EDF)
-
-# if __name__ == '__main__':
-# main()
